@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.bookAPI
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
