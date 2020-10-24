@@ -18,20 +18,33 @@ class BookAPIController(val bookRepository: BookRepository) {
     fun getBookByID(@PathVariable bookID: Long) = bookRepository.findByIdOrNull(bookID)
 
     @GetMapping("/average_rating")
-    fun getBookByGreaterRating(@RequestParam parameters: Map<String, String>): List<Book>? {
+    fun getBookByGreaterRating(@RequestParam parameters: Map<String, String>): List<ResponseEntity<Book>>? {
         if (parameters.size == 1) {
             if(parameters.containsKey("gte"))
-                return parameters["gte"]?.toFloat()?.let { bookRepository.findAllByAverageRatingIsGreaterThanEqual(it) }
+                return parameters["gte"]?.toFloat()?.let {
+                    bookRepository.findAllByAverageRatingIsGreaterThanEqual(it).map { book ->
+                        ResponseEntity.ok(book)
+                    }
+                }
             else if(parameters.containsKey("lte"))
-                return parameters["lte"]?.toFloat()?.let { bookRepository.findAllByAverageRatingIsLessThanEqual(it) }
+                return parameters["lte"]?.toFloat()?.let {
+                    bookRepository.findAllByAverageRatingIsLessThanEqual(it).map { book ->
+                        ResponseEntity.ok(book)
+                    }
+                }
         }
         else if(parameters.size == 2) {
-            if(parameters.containsKey("gte") && parameters.containsKey("lte")) {
-                return parameters["lte"]?.toFloat()?.let {
-                    parameters["gte"]?.toFloat()?.let { it1 -> bookRepository.findAllByAverageRatingIsBetween(it, it1) }
+            if(parameters.containsKey("gte") && parameters.containsKey("lte"))
+                return parameters["gte"]?.toFloat()?.let {
+                    parameters["lte"]?.toFloat()?.let { it1 ->
+                        bookRepository.findAllByAverageRatingIsBetween(it, it1).map { book ->
+                            ResponseEntity.ok(book)
+                        }
+                    }
                 }
-            }
         }
+
+        return listOf(ResponseEntity.badRequest().build<Book>())
     }
 
     @GetMapping("/authors/{author}")
