@@ -33,7 +33,7 @@ curl --location --request GET 'localhost:8080/v1/api/books/average_rating?lte=2.
 
 Get books per author:
 ```shell
-curl --location --request GET 'localhost:8080/v1/api/books/authors/Diogo'
+curl --location --request GET 'localhost:8080/v1/api/books/authors/{author}'
 ```
 
 ### POST Request
