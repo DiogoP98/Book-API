@@ -1,6 +1,6 @@
 # Book API
 
-Basic REST API, built with Kotlin using Spring Boot, Flyway and PostgreSQL, with the goal of learning the basics of Kotlin.
+Basic REST API, built with Kotlin using Maven, Spring Boot, Flyway and PostgreSQL, with the goal of learning the basics of Kotlin.
 
 ## Run 
 Start postgresql server
