@@ -78,5 +78,5 @@ curl --location --request PUT 'localhost:8080/v1/api/books/{bookid}' \          
 
 ### DELETE Request
 ```shell
-curl --location DELETE 'localhost:8080/v1/api/books/{bookid)'
+curl --location DELETE 'localhost:8080/v1/api/books/{bookid}'
 ```
