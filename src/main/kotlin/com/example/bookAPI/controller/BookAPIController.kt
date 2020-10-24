@@ -2,7 +2,6 @@ package com.example.bookAPI.controller
 
 import com.example.bookAPI.model.Book
 import com.example.bookAPI.persistence.BookRepository
-import org.hibernate.tool.schema.spi.ExceptionHandler
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -54,13 +53,13 @@ class BookAPIController(val bookRepository: BookRepository) {
     @PostMapping
     fun newBook(@RequestBody book: Book) = bookRepository.save(book)
 
-    @PutMapping("/{id}")
+    @PutMapping("/{bookID}")
     fun updateBook(@PathVariable bookID: Long, @RequestBody book: Book) {
         assert(bookID == book.id)
         bookRepository.save(book)
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{bookID}")
     fun deleteBook(@PathVariable bookID: Long) = bookRepository.deleteById(bookID)
 
     
