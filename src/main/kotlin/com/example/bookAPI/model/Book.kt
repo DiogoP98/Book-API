@@ -3,9 +3,10 @@ package com.example.bookAPI.model
 import java.util.*
 import javax.persistence.*
 
+
 @Entity
 @Table(name = "books")
-class Book {
+class Book{
     //Change Generation value strategy, because Postgres uses sequence tables.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +18,7 @@ class Book {
     val title: String? = ""
 
     @Column(name = "authors")
-    val authors: Array<String> = emptyArray()
+    val authors: String? = ""
 
     @Column(name = "average_rating")
     val averageRating: Float? = null
