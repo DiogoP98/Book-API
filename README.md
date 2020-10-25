@@ -14,6 +14,12 @@ or
 pg_ctl -D /usr/local/var/postgres -l logfile start
 ```
 
+To run the project:
+
+```
+mvn spring-boot:run
+```
+
 ### GET Request
 
 Get all the books in the database:
