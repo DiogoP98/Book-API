@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "books")
-class Book{
+class Book {
     //Change Generation value strategy, because Postgres uses sequence tables.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
