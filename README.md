@@ -1,6 +1,6 @@
 # Book API
 
-Basic REST API, built with Kotlin using Maven, Spring Boot, Flyway and PostgreSQL, with the goal of learning the basics of Kotlin.
+Basic REST API, built with Kotlin using Maven, Spring Boot, Flyway and PostgreSQL, with the goal of learning the basics of Kotlin. The database can be populated by uncommenting the last lines of the "src/main/resources/db/migration/V1__CreateTable.sql" file and changing the Flyway placeholder for the project base directory in the file "src/main/resources/application.properties". These lines will copy data from a csv file obtained from https://www.kaggle.com/jealousleopard/goodreadsbooks.
 
 ## Run 
 Start postgresql server
