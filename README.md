@@ -68,6 +68,7 @@ curl --location --request POST 'localhost:8080/v1/api' \
 curl --location --request PUT 'localhost:8080/v1/api/books/{bookid}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
+    "id": {bookid},
     "title": "Harry Potter and the Order of the Phoenix",
     "authors": "J. K. Rowling/Mary GrandPré",
     "averageRating": 4.95,
