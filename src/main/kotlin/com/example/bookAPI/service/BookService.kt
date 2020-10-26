@@ -62,13 +62,24 @@ class BookService(private val bookRepository: BookRepository) {
     fun newBook(book: Book): ResponseEntity<Book> = ResponseEntity.ok(bookRepository.save(book))
 
     fun updateBook(bookID: Long, newBook: Book): ResponseEntity<Book> {
-        assert(bookID == newBook.id)
-
-        val book: Optional<Book> = bookRepository.findById(bookID)
+        var book: Optional<Book> = bookRepository.findById(bookID)
 
         if(!book.isPresent) return ResponseEntity.notFound().build()
 
-        return ResponseEntity.ok().body(bookRepository.save(newBook))
+        var bookFound = book.get()
+        bookFound.title = newBook.title
+        bookFound.authors = newBook.authors
+        bookFound.averageRating = newBook.averageRating
+        bookFound.isbn = newBook.isbn
+        bookFound.isbn13 = newBook.isbn13
+        bookFound.languageCode = newBook.languageCode
+        bookFound.numPages = newBook.numPages
+        bookFound.ratingsCount = newBook.ratingsCount
+        bookFound.textReviewsCount = newBook.textReviewsCount
+        bookFound.publicationDate = newBook.publicationDate
+        bookFound.publisher = newBook.publisher
+
+        return ResponseEntity.ok().body(bookRepository.save(bookFound))
     }
 
     fun deleteBook(bookID: Long): ResponseEntity<Void> = bookRepository.findById(bookID).map { book ->

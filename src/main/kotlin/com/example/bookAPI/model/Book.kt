@@ -12,38 +12,38 @@ class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "bookID")
-    val id: Long? = null
+    var id: Long? = null
 
     @Column(name = "title")
-    val title: String? = ""
+    var title: String? = ""
 
     @Column(name = "authors")
-    val authors: String? = ""
+    var authors: String? = ""
 
     @Column(name = "average_rating")
-    val averageRating: Float? = null
+    var averageRating: Float? = null
 
     @Column(name = "isbn")
-    val isbn: String? = ""
+    var isbn: String? = ""
 
     @Column(name = "isbn13")
-    val isbn13: String? = ""
+    var isbn13: String? = ""
 
     @Column(name = "language_code")
-    val languageCode: String? = ""
+    var languageCode: String? = ""
 
     @Column(name = "num_pages")
-    val numPages: Int? = null
+    var numPages: Int? = null
 
     @Column(name = "ratings_count")
-    val ratingsCount: Long? = null
+    var ratingsCount: Long? = null
 
     @Column(name = "text_reviews_count")
-    val textReviewsCount: Long? = null
+    var textReviewsCount: Long? = null
 
     @Column(name = "publication_date")
-    val publicationDate: Date? = null
+    var publicationDate: Date? = null
 
     @Column(name = "publisher")
-    val publisher: String? = ""
+    var publisher: String? = ""
 }
