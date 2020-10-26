@@ -65,7 +65,7 @@ curl --location --request POST 'localhost:8080/v1/api' \
 ### PUT Request
 
 ```shell
-curl --location --request PUT 'localhost:8080/v1/api/books/{bookid}' \                                                                                              
+curl --location --request PUT 'localhost:8080/v1/api/books/{bookid}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "title": "Harry Potter and the Order of the Phoenix",
