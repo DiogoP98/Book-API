@@ -1,66 +1,33 @@
 package com.example.bookAPI.controller
 
+import com.example.bookAPI.service.BookService
 import com.example.bookAPI.model.Book
-import com.example.bookAPI.persistence.BookRepository
-import org.springframework.data.repository.findByIdOrNull
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("v1/api/books")
-class BookAPIController(val bookRepository: BookRepository) {
+@RequestMapping("v1/api")
+class BookAPIController(private val bookService: BookService) {
 
-    @GetMapping
-    fun getBooks(): MutableList<Book> = bookRepository.findAll()
+    @GetMapping("/books")
+    fun getBooks(): MutableList<Book> = bookService.getBooks()
 
-    @GetMapping("/{bookID}")
-    fun getBookByID(@PathVariable bookID: Long) = bookRepository.findByIdOrNull(bookID)
+    @GetMapping("/books/{bookID}")
+    fun getBookByID(@PathVariable bookID: Long) = bookService.getBookByID(bookID)
 
-    @GetMapping("/average_rating")
-    fun getBookByGreaterRating(@RequestParam parameters: Map<String, String>): List<ResponseEntity<Book>>? {
-        if (parameters.size == 1) {
-            if(parameters.containsKey("gte"))
-                return parameters["gte"]?.toFloat()?.let {
-                    bookRepository.findAllByAverageRatingIsGreaterThanEqual(it).map { book ->
-                        ResponseEntity.ok(book)
-                    }
-                }
-            else if(parameters.containsKey("lte"))
-                return parameters["lte"]?.toFloat()?.let {
-                    bookRepository.findAllByAverageRatingIsLessThanEqual(it).map { book ->
-                        ResponseEntity.ok(book)
-                    }
-                }
-        }
-        else if(parameters.size == 2) {
-            if(parameters.containsKey("gte") && parameters.containsKey("lte"))
-                return parameters["gte"]?.toFloat()?.let {
-                    parameters["lte"]?.toFloat()?.let { it1 ->
-                        bookRepository.findAllByAverageRatingIsBetween(it, it1).map { book ->
-                            ResponseEntity.ok(book)
-                        }
-                    }
-                }
-        }
+    @GetMapping("/books/average-rating")
+    fun getBookByRating(@RequestParam(required = true) parameters: Map<String, String>) = bookService.getBooksByRating(parameters)
 
-        return listOf(ResponseEntity.badRequest().build<Book>())
-    }
-
-    @GetMapping("/authors/{author}")
-    fun getBooksByAuthor(@PathVariable author: String) =
-           bookRepository.findAllByAuthorsContaining(author)
+    @GetMapping("/authors/{author}/books")
+    fun getBooksByAuthor(@PathVariable author: String) = bookService.getBooksByAuthor(author)
 
     @PostMapping
-    fun newBook(@RequestBody book: Book) = bookRepository.save(book)
+    fun newBook(@RequestBody book: Book) = bookService.newBook(book)
 
-    @PutMapping("/{bookID}")
-    fun updateBook(@PathVariable bookID: Long, @RequestBody book: Book) {
-        assert(bookID == book.id)
-        bookRepository.save(book)
-    }
+    @PutMapping("/books/{bookID}")
+    fun updateBook(@PathVariable bookID: Long, @RequestBody book: Book) = bookService.updateBook(bookID, book)
 
-    @DeleteMapping("/{bookID}")
-    fun deleteBook(@PathVariable bookID: Long) = bookRepository.deleteById(bookID)
+    @DeleteMapping("/books/{bookID}")
+    fun deleteBook(@PathVariable bookID: Long) = bookService.deleteBook(bookID)
 
     
 

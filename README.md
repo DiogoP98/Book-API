@@ -32,20 +32,20 @@ Get a specific book
 curl --location --request GET 'localhost:8080/v1/api/books/{bookid}'
 ```
 
-Get books based on average rating (e.g. ratings less or equal to 2.9):
+Get books based on average rating (e.g. ratings less or equal to 2.9 and greater or equal to 2.5):
 ```shell
-curl --location --request GET 'localhost:8080/v1/api/books/average_rating?lte=2.9'
+curl --location --request GET 'localhost:8080/v1/api/books/average-rating?lte=2.9&gte=2.5'
 ```
 
 Get books per author:
 ```shell
-curl --location --request GET 'localhost:8080/v1/api/books/authors/{author}'
+curl --location --request GET 'localhost:8080/v1/api/authors/{author}/books'
 ```
 
 ### POST Request
 
 ```shell
-curl --location --request POST 'localhost:8080/v1/api/books/' \
+curl --location --request POST 'localhost:8080/v1/api' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "title": "Harry Potter and the Order of the Phoenix",
